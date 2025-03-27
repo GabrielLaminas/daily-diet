@@ -9,6 +9,7 @@ type Props = {
 }
 
 const Container = styled(TouchableOpacity)`
+  margin-bottom: 40px;
   padding: 20px 16px;
   position: relative;
   border-radius: 8px;
