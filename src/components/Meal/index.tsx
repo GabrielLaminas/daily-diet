@@ -1,17 +1,23 @@
+import { Text, TouchableOpacityProps, TextProps } from "react-native";
 import React from "react";
-import { Container, Title } from "./styles";
-import { ButtonFill } from "@components/Button";
+import { Container, FlexContainer, Hour, Description, Status, StatusProps } from "./styles";
 
-export default function Meal() {
+type MealProps = TouchableOpacityProps & {
+  hour: string;
+  description: string;
+  status: StatusProps;
+}
+
+export default function Meal({ hour, description, status, ...rest }: MealProps) {
   return (
-    <Container>
-      <Title>Refeições</Title>
-      
-      <ButtonFill 
-        text="Nova refeição" 
-        variant="FILL"
-        name="plus"
-      />
+    <Container {...rest}>
+      <FlexContainer>
+        <Hour>{hour}</Hour>
+        <Text>{" | "}</Text>
+        <Description numberOfLines={1}>{description}</Description>
+      </FlexContainer>
+
+      <Status status={status} />
     </Container>
   );
 }
