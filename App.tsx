@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components/native";
 import theme from '@theme/index';
 import Loading from '@components/Loading';
 import Home from '@screens/Home';
+import DietDetails from '@screens/DietDetails';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -19,7 +20,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent 
       />
-      { fontsLoaded ? <Home /> : <Loading />}
+      { fontsLoaded ? <DietDetails percent='99,21' variant='SUCCESS' /> : <Loading />}
     </ThemeProvider>
   );
 }
