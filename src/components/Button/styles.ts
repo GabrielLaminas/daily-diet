@@ -1,9 +1,16 @@
 import styled, { DefaultTheme } from "styled-components/native";
+import { ArrowLeft } from "phosphor-react-native";
 
 type ButtonsVariantsProps = "FILL" | "OUTLINE";
 
 type Props = {
   variant: ButtonsVariantsProps;
+}
+
+type ButtonBackProps = "SUCCESS" | "FAIL" | "NEUTRAL";
+
+type ButtonBackIconProps = {
+  variant: ButtonBackProps;
 }
 
 const Fill = styled.TouchableOpacity`
@@ -24,4 +31,15 @@ const TextButton = styled.Text`
   text-align: center;
 `;
 
-export { Fill, TextButton, ButtonsVariantsProps };
+const ButtonBack = styled.TouchableOpacity`
+  width: 24px;
+  height: 24px;
+  align-self: flex-start;
+`;
+
+const BackIcon = styled(ArrowLeft)`
+  size: 24;
+  color: ${({ theme, variant }: { theme: DefaultTheme, variant: ButtonBackIconProps["variant"] }) => variant === "SUCCESS" ? theme.COLORS.GREEN_DARK : variant === "FAIL" ? theme.COLORS.RED_DARK : theme.COLORS.GRAY_200 };
+`;
+
+export { Fill, TextButton, ButtonBack, BackIcon, ButtonBackProps, ButtonsVariantsProps };
