@@ -1,6 +1,8 @@
-import { Text, TouchableOpacityProps, TextProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 import React from "react";
-import { Container, FlexContainer, Hour, Description, Status, StatusProps } from "./styles";
+import { 
+  Container, FlexContainer, Hour, Divisor, Description, Status, StatusProps 
+} from "./styles";
 
 type MealProps = TouchableOpacityProps & {
   hour: string;
@@ -13,7 +15,7 @@ export default function Meal({ hour, description, status, ...rest }: MealProps) 
     <Container {...rest}>
       <FlexContainer>
         <Hour>{hour}</Hour>
-        <Text>{" | "}</Text>
+        <Divisor>|</Divisor>
         <Description numberOfLines={1}>{description}</Description>
       </FlexContainer>
 
