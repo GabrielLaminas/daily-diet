@@ -4,7 +4,7 @@ import { Container } from "./styles";
 import Header from "@components/Header";
 import Percent from "@components/Percent";
 import NewMeal from "@components/NewMeal";
-import Meal from "@components/Meal";
+import { Meal, TitleMeal } from "@components/Meal";
 
 const DATA = [
   {
@@ -38,9 +38,7 @@ export default function Home() {
           />
         )}
         renderSectionHeader={({section: { title }}) => (
-          <View>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>{title}</Text>
-          </View>
+          <TitleMeal title={title} />
         )}
       />
     </Container>

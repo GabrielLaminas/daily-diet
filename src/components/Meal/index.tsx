@@ -1,7 +1,7 @@
 import { TouchableOpacityProps } from "react-native";
 import React from "react";
 import { 
-  Container, FlexContainer, Hour, Divisor, Description, Status, StatusProps 
+  Container, FlexContainer, Title, Hour, Divisor, Description, Status, StatusProps 
 } from "./styles";
 
 type MealProps = TouchableOpacityProps & {
@@ -10,7 +10,7 @@ type MealProps = TouchableOpacityProps & {
   status: StatusProps;
 }
 
-export default function Meal({ hour, description, status, ...rest }: MealProps) {
+export function Meal({ hour, description, status, ...rest }: MealProps) {
   return (
     <Container {...rest}>
       <FlexContainer>
@@ -22,4 +22,8 @@ export default function Meal({ hour, description, status, ...rest }: MealProps) 
       <Status status={status} />
     </Container>
   );
+}
+
+export function TitleMeal({ title }: { title: string }){
+  return <Title>{title}</Title>
 }

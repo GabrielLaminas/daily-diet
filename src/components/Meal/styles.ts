@@ -25,6 +25,12 @@ const FlexContainer = styled.View`
   flex: 2;
 `;
 
+const Title = styled.Text`
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
+  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG }px;
+`;
+
 const Hour = styled.Text`
   color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
   font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
@@ -53,4 +59,6 @@ const Status = styled.Text`
   background-color: ${({ theme, status }: { theme: DefaultTheme, status: Props["status"] }) => status === "SUCCESS" ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID };
 `;
 
-export { Container, FlexContainer, Hour, Divisor, Description, Status, StatusProps };
+export { 
+  Container, FlexContainer, Title, Hour, Divisor, Description, Status, StatusProps 
+};
