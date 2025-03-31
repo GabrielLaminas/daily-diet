@@ -7,6 +7,7 @@ import Loading from '@components/Loading';
 import Home from '@screens/Home';
 import DietDetails from '@screens/DietDetails';
 import Registration from '@screens/Registration';
+import Feedback from '@screens/Feedback';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -21,7 +22,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent 
       />
-      { fontsLoaded ? <Registration /> : <Loading />}
+      { fontsLoaded ? <Feedback /> : <Loading />}
     </ThemeProvider>
   );
 }
