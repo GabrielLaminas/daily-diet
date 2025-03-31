@@ -14,7 +14,6 @@ type ButtonBackIconProps = {
 }
 
 const Fill = styled.TouchableOpacity`
-  width: 100%;
   padding: 16px 24px;
   flex-direction: row;
   align-items: center;
