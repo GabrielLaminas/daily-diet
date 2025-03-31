@@ -6,6 +6,7 @@ import theme from '@theme/index';
 import Loading from '@components/Loading';
 import Home from '@screens/Home';
 import DietDetails from '@screens/DietDetails';
+import Registration from '@screens/Registration';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -20,7 +21,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent 
       />
-      { fontsLoaded ? <DietDetails percent='99,21' variant='SUCCESS' /> : <Loading />}
+      { fontsLoaded ? <Registration /> : <Loading />}
     </ThemeProvider>
   );
 }

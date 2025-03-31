@@ -35,6 +35,7 @@ const ButtonBack = styled.TouchableOpacity`
   width: 24px;
   height: 24px;
   align-self: flex-start;
+  flex-shrink: 0;
 `;
 
 const BackIcon = styled(ArrowLeft)`
