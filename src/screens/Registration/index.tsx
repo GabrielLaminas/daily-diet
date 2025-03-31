@@ -30,7 +30,7 @@ export default function Registration() {
             style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
           />
 
-          <RowContainer>
+          <RowContainer style={{ gap: 20 }}>
             <View style={{flex: 1}}>
               <Input 
                 label="Data"
@@ -47,7 +47,7 @@ export default function Registration() {
           <DietContainer>
             <LabelDiet>Está dentro da dieta?</LabelDiet>
 
-            <RowContainer>
+            <RowContainer style={{ gap: 8 }}>
               <ContainerSelect>
                 <SelectView>
                   <Circle variant="SUCCESS" />

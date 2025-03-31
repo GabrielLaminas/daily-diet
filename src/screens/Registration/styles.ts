@@ -30,7 +30,6 @@ const ColumnContainer = styled.View`
 
 const RowContainer = styled.View`
   flex-direction: row;
-  gap: 20px;
 `;
 
 const DietContainer = styled.View``;
