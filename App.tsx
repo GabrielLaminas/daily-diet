@@ -9,6 +9,7 @@ import DietDetails from '@screens/DietDetails';
 import Registration from '@screens/Registration';
 import Feedback from '@screens/Feedback';
 import InfoMeal from '@screens/InfoMeal';
+import Edition from '@screens/Edition';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -23,7 +24,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent 
       />
-      { fontsLoaded ? <InfoMeal /> : <Loading />}
+      { fontsLoaded ? <Edition /> : <Loading />}
     </ThemeProvider>
   );
 }
