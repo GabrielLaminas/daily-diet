@@ -20,6 +20,7 @@ const Fill = styled.TouchableOpacity`
   justify-content: center;
   gap: 12px;
   background-color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.GRAY_200 : "transparent" };
+  border: 1px solid ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.GRAY_200 : theme.COLORS.GRAY_100 };
   border-radius: 6px;
 `;
 
