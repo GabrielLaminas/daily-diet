@@ -6,8 +6,15 @@ import {
 } from "./styles";
 import Title from "@components/Title";
 import { ButtonFill } from "@components/Button";
+import ModalDelete from "@components/Modal";
 
 export default function InfoMeal() {
+  const [modalVisible, setModalVisible] = React.useState(false);
+
+  function handleOpenModal(){
+    setModalVisible(true);
+  }
+
   return (
     <Container>
       <Title 
@@ -44,9 +51,15 @@ export default function InfoMeal() {
             text="Excluir refeição"
             variant="OUTLINE"
             name="trash-2"
+            onPress={handleOpenModal}
           />
         </ColumnContainer>
       </ContentContainer>
+
+      <ModalDelete 
+        visible={modalVisible}
+        setVisible={setModalVisible}
+      />
     </Container>
   );
 }
