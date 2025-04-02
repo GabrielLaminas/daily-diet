@@ -7,16 +7,32 @@ import {
 import Title from "@components/Title";
 import { ButtonFill } from "@components/Button";
 import ModalDelete from "@components/Modal";
+import { useRoute, useNavigation } from "@react-navigation/native";
+
+interface InfoMealProps {
+  title: string;
+  name: string;
+  hour: string;
+  meal: string;
+  status: VariantProps;
+}
 
 export default function InfoMeal() {
   const [modalVisible, setModalVisible] = React.useState(false);
+  const navigation = useNavigation();
+  const route = useRoute();
+  const params = route.params as InfoMealProps;
+
+  function handleOpenEditScreen(){
+    navigation.navigate("Edition", { title: params.title, name: params.name, meal: params.meal, hour: params.hour, status: params.status })
+  }
 
   function handleOpenModal(){
     setModalVisible(true);
   }
 
   return (
-    <Container>
+    <Container variant={params.status}>
       <Title 
         title="Refeição"
       />
@@ -24,17 +40,17 @@ export default function InfoMeal() {
       <ContentContainer>
         <ColumnContainer>
           <InfoContainer>
-            <MealTitle>Sanduíche</MealTitle>
-            <MealDescription>Sanduíche de pão integral com atum e salada de alface e tomate</MealDescription>
+            <MealTitle>{params.name}</MealTitle>
+            <MealDescription>{params.meal}</MealDescription>
           </InfoContainer>
 
           <InfoContainer>
             <DateTimeTitle>Data e hora</DateTimeTitle>
-            <DateTimeInfo>12/08/2022 às 16:00</DateTimeInfo>
+            <DateTimeInfo>{params.title} às {params.hour}</DateTimeInfo>
           </InfoContainer>
 
           <TagContainer>
-            <TagCircle />
+            <TagCircle variant={params.status} />
             <TagInfo>dentro da dieta</TagInfo>
           </TagContainer>
         </ColumnContainer>
@@ -45,6 +61,7 @@ export default function InfoMeal() {
             variant="FILL"
             name="edit-3"
             style={{marginBottom: 9}}
+            onPress={handleOpenEditScreen}
           />
 
           <ButtonFill 
