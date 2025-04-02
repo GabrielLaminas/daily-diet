@@ -7,16 +7,19 @@ import {
 import Title from "@components/Title";
 import Input from "@components/Input";
 import { ButtonFill } from "@components/Button";
+import { useRoute } from "@react-navigation/native";
 
-interface MealProps {
+interface EditionProps {
+  title: string;
   name: string;
-  description: string;
-  data: Date;
   hour: string;
+  meal: string;
   status: "SUCCESS" | "FAIL";
 }
 
 export default function Edition() {
+  const route = useRoute();
+  const params = route.params as EditionProps;
 
   return (
     <Container>
@@ -28,6 +31,7 @@ export default function Edition() {
         <ColumnContainer>
           <Input 
             label="Nome"
+            defaultValue={params.name}
           />
 
           <Input 
@@ -35,6 +39,7 @@ export default function Edition() {
             multiline
             numberOfLines={4}
             autoCorrect={false}
+            defaultValue={params.meal}
             style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
           />
 
@@ -42,12 +47,14 @@ export default function Edition() {
             <View style={{flex: 1}}>
               <Input 
                 label="Data"
+                defaultValue={params.title}
               />
             </View>
 
             <View style={{flex: 1}}>
               <Input 
                 label="Hora"
+                defaultValue={params.hour}
               />
             </View>
           </RowContainer>
@@ -56,14 +63,14 @@ export default function Edition() {
             <LabelDiet>Está dentro da dieta?</LabelDiet>
 
             <RowContainer style={{ gap: 8 }}>
-              <ContainerSelect>
+              <ContainerSelect checked={params.status === "SUCCESS" ? "SUCCESS" : null}>
                 <SelectView>
                   <Circle variant="SUCCESS" />
                   <TextSelect>Sim</TextSelect>
                 </SelectView>
               </ContainerSelect>
 
-              <ContainerSelect>
+              <ContainerSelect checked={params.status === "FAIL" ? "FAIL" : null}>
                 <SelectView>
                   <Circle variant="FAIL" />
                   <TextSelect>Não</TextSelect>
