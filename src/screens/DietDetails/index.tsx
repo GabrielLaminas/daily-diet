@@ -3,20 +3,38 @@ import {
   Container, PercentContainer, ColumnContainer, RowContainer, PercentTitle, PercentBody, 
   ContentContainer, ContentContainerTitle, DietDatailsVariant 
 } from "./styles";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { ButtonBackIcon } from "@components/Button";
 import Box from "@components/Box";
 
 type DietDetailsProps = {
   percent: string;
   variant: DietDatailsVariant;
+  sequence: number;
+  total_meal: number;
+  in_meal: number;
+  out_meal: number;
 }
 
-export default function DietDetails({ percent, variant }: DietDetailsProps) {
+export default function DietDetails() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const params = route.params as DietDetailsProps;
+
+  function handleGoBack(){
+    navigation.navigate("Home");
+  }
+
   return (
-    <Container variant={variant}>
+    <Container variant={params.variant}>
       <PercentContainer>
-        <ButtonBackIcon variant={variant} style={{marginBottom: -16}} />
-        <PercentTitle>{percent}%</PercentTitle>
+        <ButtonBackIcon 
+          variant={params.variant} 
+          style={{marginBottom: -16}} 
+          onPress={handleGoBack}
+        />
+        <PercentTitle>{params.percent}%</PercentTitle>
         <PercentBody>das refeições dentro da dieta</PercentBody>
       </PercentContainer>
 
@@ -25,27 +43,27 @@ export default function DietDetails({ percent, variant }: DietDetailsProps) {
 
         <ColumnContainer>
           <Box 
-            title="22"
+            title={params.sequence}
             body="melhor sequência de pratos dentro da dieta"
             variant="NEUTRAL"
           />
 
           <Box 
-            title="109"
+            title={params.total_meal}
             body="refeições registradas"
             variant="NEUTRAL"
           />
 
           <RowContainer>
             <Box 
-              title="99"
+              title={params.in_meal}
               body="refeições dentro da dieta"
               variant="SUCCESS"
               style={{flex: 1}}
             />
 
             <Box 
-              title="10"
+              title={params.out_meal}
               body="refeições fora da dieta"
               variant="FAIL"
               style={{flex: 1}}
