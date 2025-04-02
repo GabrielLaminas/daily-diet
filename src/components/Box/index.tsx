@@ -3,7 +3,7 @@ import { ViewProps } from "react-native";
 import { Container, Title, Body, BoxVariantProps } from "./styles";
 
 type BoxProps = ViewProps & {
-  title: string;
+  title: string | number;
   body: string;
   variant: BoxVariantProps;
 }

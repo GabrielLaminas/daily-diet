@@ -1,8 +1,9 @@
 import React from "react";
+import { TouchableOpacityProps } from "react-native";
 import { Container, Title } from "./styles";
 import { ButtonFill } from "@components/Button";
 
-export default function NewMeal() {
+export default function NewMeal({ ...rest }: TouchableOpacityProps) {
   return (
     <Container>
       <Title>Refeições</Title>
@@ -11,6 +12,7 @@ export default function NewMeal() {
         text="Nova refeição" 
         variant="FILL"
         name="plus"
+        {...rest}
       />
     </Container>
   );
