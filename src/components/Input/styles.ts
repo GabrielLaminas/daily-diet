@@ -17,7 +17,7 @@ const TextInput = styled.TextInput`
   padding: 14px;
   color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
   font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE };
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
   border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_500 };
   border-radius: 6px;
 `;

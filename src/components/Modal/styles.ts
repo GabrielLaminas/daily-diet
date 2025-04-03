@@ -20,7 +20,7 @@ const Title = styled.Text`
   padding: 0 24px;
   color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
   font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG };
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG }px;
   text-align: center;
 `
 
