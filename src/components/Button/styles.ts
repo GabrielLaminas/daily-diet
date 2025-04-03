@@ -27,7 +27,7 @@ const Fill = styled.TouchableOpacity`
 const TextButton = styled.Text`
   color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.WHITE : theme.COLORS.GRAY_100 };
   font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM };
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
   text-align: center;
 `;
 

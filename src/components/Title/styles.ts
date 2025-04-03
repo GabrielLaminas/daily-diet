@@ -11,7 +11,7 @@ const TextTitle = styled.Text`
   text-align: center;
   color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
   font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG };
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG }px;
 `;
 
 export { Container, TextTitle };
