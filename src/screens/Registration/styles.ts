@@ -41,7 +41,7 @@ const LabelDiet = styled.Text`
   font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
 `;
 
-const ContainerSelect = styled.TouchableHighlight`
+const ContainerSelect = styled.TouchableOpacity`
   padding: 16px;
   flex: 1;
   gap: 8px;
@@ -72,5 +72,5 @@ const TextSelect = styled.Text`
 
 export { 
   Container, ContentContainer, ColumnContainer, RowContainer, 
-  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect
+  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, SelectBoxProps, VariantProps
 };

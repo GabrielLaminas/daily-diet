@@ -27,7 +27,10 @@ export declare global {
         hour: string;
         meal: string;
         status: StatusProps;
-      }
+      },
+      Feedback: {
+        status: StatusProps;
+      };
     }
   }
 }
