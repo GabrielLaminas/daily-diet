@@ -2,20 +2,17 @@ import { View } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
-  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, VariantProps
+  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect
 } from "./styles";
+
+import mealCreate from "storage/meal/mealCreate";
+import { DataMealDTO } from "storage/meal/mealStorageDTO";
+
 import Title from "@components/Title";
 import Input from "@components/Input";
 import { ButtonFill } from "@components/Button";
-import { useNavigation } from "@react-navigation/native";
 
-interface RegistrationProps {
-  title: string;
-  description: string;
-  date: string;
-  hour: string;
-  status: SelectBoxProps;
-}
+import { useNavigation } from "@react-navigation/native";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -26,20 +23,19 @@ export default function Registration() {
 
   const navigation = useNavigation();
 
-  function handleRegistrationMeal(){
-    const registration: RegistrationProps = {
-      title: name,
-      description,
-      date,
-      hour,
-      status
+  async function handleRegistrationMeal(){
+    const registration: DataMealDTO = {
+      title: date,
+      data: [
+        { name, description, hour, status}
+      ]
     }
 
-    if(registration.title && registration.description && registration.date && registration.hour && registration.status){
-      navigation.navigate("Feedback", { status: status as VariantProps })
+    if(name && description && date && hour && status !== "NEUTRAL"){
+      navigation.navigate("Feedback", { status: status })
+      mealCreate(registration)
+      console.log(registration)
     }
-
-    console.log(registration)
   }
 
   function handleChangeStatusDiet(status: SelectBoxProps){
