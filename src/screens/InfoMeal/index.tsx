@@ -13,7 +13,7 @@ interface InfoMealProps {
   title: string;
   name: string;
   hour: string;
-  meal: string;
+  description: string;
   status: VariantProps;
 }
 
@@ -24,7 +24,7 @@ export default function InfoMeal() {
   const params = route.params as InfoMealProps;
 
   function handleOpenEditScreen(){
-    navigation.navigate("Edition", { title: params.title, name: params.name, meal: params.meal, hour: params.hour, status: params.status })
+    navigation.navigate("Edition", { title: params.title, name: params.name, description: params.description, hour: params.hour, status: params.status })
   }
 
   function handleOpenModal(){
@@ -41,7 +41,7 @@ export default function InfoMeal() {
         <ColumnContainer>
           <InfoContainer>
             <MealTitle>{params.name}</MealTitle>
-            <MealDescription>{params.meal}</MealDescription>
+            <MealDescription>{params.description}</MealDescription>
           </InfoContainer>
 
           <InfoContainer>
@@ -51,7 +51,7 @@ export default function InfoMeal() {
 
           <TagContainer>
             <TagCircle variant={params.status} />
-            <TagInfo>dentro da dieta</TagInfo>
+            <TagInfo>{ params.status === "SUCCESS" ? "dentro da dieta" : "fora da dieta"}</TagInfo>
           </TagContainer>
         </ColumnContainer>
 

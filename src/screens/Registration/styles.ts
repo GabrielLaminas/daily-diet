@@ -72,5 +72,5 @@ const TextSelect = styled.Text`
 
 export { 
   Container, ContentContainer, ColumnContainer, RowContainer, 
-  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, SelectBoxProps, VariantProps
+  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, SelectBoxProps
 };

@@ -13,7 +13,7 @@ interface EditionProps {
   title: string;
   name: string;
   hour: string;
-  meal: string;
+  description: string;
   status: "SUCCESS" | "FAIL";
 }
 
@@ -39,7 +39,7 @@ export default function Edition() {
             multiline
             numberOfLines={4}
             autoCorrect={false}
-            defaultValue={params.meal}
+            defaultValue={params.description}
             style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
           />
 

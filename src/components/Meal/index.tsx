@@ -7,7 +7,7 @@ import {
 type MealProps = TouchableOpacityProps & {
   hour: string;
   description: string;
-  status: StatusProps;
+  status: StatusProps | "NEUTRAL";
 }
 
 export function Meal({ hour, description, status, ...rest }: MealProps) {
@@ -25,5 +25,5 @@ export function Meal({ hour, description, status, ...rest }: MealProps) {
 }
 
 export function TitleMeal({ title }: { title: string }){
-  return <Title>{title}</Title>
+  return <Title>{title.replaceAll("/", ".")}</Title>
 }
