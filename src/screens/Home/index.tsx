@@ -10,7 +10,7 @@ import NewMeal from "@components/NewMeal";
 import { Meal, TitleMeal } from "@components/Meal";
 
 import { useNavigation } from "@react-navigation/native";
-import mealGetAll from "storage/meal/mealGetAll";
+import { mealGetAll } from "storage/meal/mealGetAll";
 
 export default function Home() {
   const [meals, setMeals] = useState<DataMealDTO[]>([]);
