@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
@@ -24,17 +24,22 @@ export default function Registration() {
   const navigation = useNavigation();
 
   async function handleRegistrationMeal(){
-    const registration: DataMealDTO = {
-      title: date,
-      data: [
-        { name, description, hour, status}
-      ]
-    }
-
-    if(name && description && date && hour && status !== "NEUTRAL"){
-      navigation.navigate("Feedback", { status: status })
-      mealCreate(registration)
-      console.log(registration)
+    try {
+      const registration: DataMealDTO = {
+        title: date,
+        data: [
+          { name, description, hour, status}
+        ]
+      }
+  
+      if(name && description && date && hour && status !== "NEUTRAL"){
+        await mealCreate(registration);
+        navigation.navigate("Feedback", { status: status });
+      }
+    } catch (error) {
+      if(error instanceof Error){
+        Alert.alert("Nova Refeição", error.message);
+      }
     }
   }
 
