@@ -1,49 +1,47 @@
-import React from "react";
-import { SectionList, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { SectionList } from "react-native";
 import { Container } from "./styles";
+
+import { DataMealDTO, DataInfoDTO } from "storage/meal/mealStorageDTO";
+
 import Header from "@components/Header";
 import Percent from "@components/Percent";
 import NewMeal from "@components/NewMeal";
 import { Meal, TitleMeal } from "@components/Meal";
+
 import { useNavigation } from "@react-navigation/native";
-
-interface DataInfoProps {
-  name: string;
-  hour: string;
-  meal: string;
-  status: "SUCCESS" | "FAIL";
-}
-
-interface DataProps {
-  title: string;
-  data: DataInfoProps[]
-}
-
-const DATA: DataProps[] = [
-  {
-    title: "12.08.22",
-    data: [
-      { hour: "20:00", name: "X-tudo", meal: "X-tudo", status: "FAIL" }, 
-      { hour: "16:00", name: "Whey protein", meal: "Whey protein com leite", status: "SUCCESS" }, 
-      { hour: "12:30", name: "Salada cesar", meal: "Salada cesar com frango grelhado", status: "SUCCESS" }, 
-    ],
-  }
-];
+import { mealGetAll } from "storage/meal/mealGetAll";
 
 export default function Home() {
+  const [meals, setMeals] = useState<DataMealDTO[]>([]);
   const navigation = useNavigation();
   
   function handleOpenPercentage(){
-    navigation.navigate("DietDetails", { percent: "90,86", variant: "SUCCESS", sequence: 22, total_meal: DATA.length, in_meal: 99, out_meal: 10 })
+    navigation.navigate("DietDetails", { percent: "90,86", variant: "SUCCESS", sequence: 22, total_meal: 20, in_meal: 99, out_meal: 10 });
   }
 
   function handleOpenNewMeal(){
-    navigation.navigate("Registration")
+    navigation.navigate("Registration");
   }
 
-  function handleOpenInfoMeal({ title, data }: { title: string, data: DataInfoProps}){
-    navigation.navigate("InfoMeal", { title: title, meal: data.meal, hour: data.hour, name: data.name, status: data.status })
+  async function getAllMeals(){
+    try {
+      const allMeals = await mealGetAll();
+      if(allMeals?.length){
+        setMeals(allMeals)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  function handleOpenInfoMeal({ title, meal }: { title: string, meal: DataInfoDTO }){
+    navigation.navigate("InfoMeal", { title: title, name: meal.name, description: meal.description, hour: meal.hour, status: meal.status });
+  }
+
+  useEffect(() => {
+    getAllMeals();
+  }, []);
 
   return (
     <Container>
@@ -54,14 +52,14 @@ export default function Home() {
       <SectionList 
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingVertical: 24, gap: 8}}
-        sections={DATA}
+        sections={meals}
         keyExtractor={(item) => item.hour}
-        renderItem={({item: { hour, meal, status, name }, section: { title }}) => (
+        renderItem={({item: { hour, description, status, name }, section: { title }}) => (
           <Meal 
             hour={hour}
-            description={meal}
+            description={description}
             status={status}
-            onPress={() => handleOpenInfoMeal({title, data: { name, hour, meal, status }})}
+            onPress={() => handleOpenInfoMeal({ title, meal: { name, hour, description, status }})}
           />
         )}
         renderSectionHeader={({section: { title }}) => (

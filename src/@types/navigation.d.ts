@@ -17,17 +17,20 @@ export declare global {
       InfoMeal: {
         title: string;
         name: string;
+        description: string;
         hour: string;
-        meal: string;
-        status: StatusProps;
+        status: StatusProps | "NEUTRAL";
       },
       Edition: {
         title: string;
         name: string;
         hour: string;
-        meal: string;
+        description: string;
         status: StatusProps;
-      }
+      },
+      Feedback: {
+        status: StatusProps;
+      };
     }
   }
 }

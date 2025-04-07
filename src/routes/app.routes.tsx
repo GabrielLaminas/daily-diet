@@ -5,6 +5,7 @@ import DietDetails from '@screens/DietDetails';
 import Registration from '@screens/Registration';
 import InfoMeal from '@screens/InfoMeal';
 import Edition from '@screens/Edition';
+import Feedback from '@screens/Feedback';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Screen name="Registration" component={Registration} />
       <Screen name="InfoMeal" component={InfoMeal} />
       <Screen name="Edition" component={Edition} />
+      <Screen name="Feedback" component={Feedback} />
     </Navigator>
   );
 }
