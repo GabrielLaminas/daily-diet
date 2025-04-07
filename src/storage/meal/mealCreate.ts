@@ -20,6 +20,7 @@ export default async function mealCreate(meal: DataMealDTO){
           const existendsMeals = meals.map((m) => {
             if(m.title === meal.title){
               m.data.unshift(...meal.data);
+              m.data = orderMealsHours(m.data);
             }
             return m;
           });
@@ -28,7 +29,8 @@ export default async function mealCreate(meal: DataMealDTO){
         }
       } else {
         meals.push(meal);
-        await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify(meals));
+        const orderMeals = orderMealsTitle(meals);
+        await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify(orderMeals));
       }
     } else {
       await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify([meal]));
@@ -36,4 +38,19 @@ export default async function mealCreate(meal: DataMealDTO){
   } catch (error) {
     throw error;
   }
+}
+
+function orderMealsHours(meals: DataInfoDTO[]){
+  return meals.sort((a, b) => b.hour.localeCompare(a.hour));
+}
+
+function parseDateString(dateStr: string) {
+  const [day, month, year] = dateStr.split('/');
+  return new Date(`${year}-${month}-${day}`);
+}
+
+function orderMealsTitle(meals: DataMealDTO[]){
+  return meals.sort((a, b) => {
+    return parseDateString(b.title).getTime() - parseDateString(a.title).getTime();
+  });
 }
