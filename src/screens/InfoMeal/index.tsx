@@ -74,6 +74,8 @@ export default function InfoMeal() {
       </ContentContainer>
 
       <ModalDelete 
+        title={params.title}
+        hour={params.hour}
         visible={modalVisible}
         setVisible={setModalVisible}
       />
