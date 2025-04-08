@@ -1,5 +1,4 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { useState} from "react";
 import { 
   Container, ContentContainer, ColumnContainer, InfoContainer, MealTitle, MealDescription,
   DateTimeTitle, DateTimeInfo, TagContainer, TagCircle, TagInfo, VariantProps
@@ -18,23 +17,28 @@ interface InfoMealProps {
 }
 
 export default function InfoMeal() {
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
   const params = route.params as InfoMealProps;
 
   function handleOpenEditScreen(){
-    navigation.navigate("Edition", { title: params.title, name: params.name, description: params.description, hour: params.hour, status: params.status })
+    navigation.navigate("Edition", { title: params.title, name: params.name, description: params.description, hour: params.hour, status: params.status });
   }
 
   function handleOpenModal(){
     setModalVisible(true);
   }
 
+  function handleBackHome(){
+    navigation.navigate("Home");
+  }
+
   return (
     <Container variant={params.status}>
       <Title 
         title="Refeição"
+        onPress={handleBackHome}
       />
 
       <ContentContainer>

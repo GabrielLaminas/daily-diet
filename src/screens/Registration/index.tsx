@@ -43,6 +43,10 @@ export default function Registration() {
     }
   }
 
+  function handleGoHome(){
+    navigation.navigate("Home");
+  }
+
   function handleChangeStatusDiet(status: SelectBoxProps){
     setStatus(status);
   }
@@ -51,7 +55,9 @@ export default function Registration() {
     <Container>
       <Title 
         title="Nova refeição"
+        onPress={handleGoHome}
       />
+      
       <ContentContainer>
         <ColumnContainer>
           <Input 
