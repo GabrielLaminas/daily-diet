@@ -10,6 +10,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 
 interface InfoMealProps {
   title: string;
+  id: number;
   name: string;
   hour: string;
   description: string;
@@ -23,7 +24,7 @@ export default function InfoMeal() {
   const params = route.params as InfoMealProps;
 
   function handleOpenEditScreen(){
-    navigation.navigate("Edition", { title: params.title, name: params.name, description: params.description, hour: params.hour, status: params.status });
+    navigation.navigate("Edition", { title: params.title, id: params.id, name: params.name, description: params.description, hour: params.hour, status: params.status });
   }
 
   function handleOpenModal(){
@@ -79,7 +80,7 @@ export default function InfoMeal() {
 
       <ModalDelete 
         title={params.title}
-        hour={params.hour}
+        id={params.id}
         visible={modalVisible}
         setVisible={setModalVisible}
       />

@@ -10,9 +10,11 @@ import { ButtonFill } from "@components/Button";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { DataInfoDTO } from "storage/meal/mealStorageDTO";
 import mealEdit from "storage/meal/mealEdit";
+import { Alert } from "react-native";
 
 interface EditionProps {
   title: string;
+  id: number;
   name: string;
   hour: string;
   description: string;
@@ -42,9 +44,11 @@ export default function Edition() {
   async function handleMealEdit(title: string, data: DataInfoDTO){
     try {
       await mealEdit(title, data);
-      navigation.navigate("InfoMeal", { title, name, description, hour, status });
+      navigation.navigate("InfoMeal", { title, id: data.id, name, description, hour, status });
     } catch (error) {
-      console.log(error);
+      if(error instanceof Error){
+        Alert.alert("Editar refeição", error.message);
+      }
     }
   }
 
@@ -126,7 +130,7 @@ export default function Edition() {
         <ButtonFill 
           text="Salvar alterações"
           variant="FILL"
-          onPress={() => handleMealEdit(title, { name, description, hour, status })}
+          onPress={() => handleMealEdit(title, { id: params.id, name, description, hour, status })}
         />
       </ContentContainer>
     </Container>

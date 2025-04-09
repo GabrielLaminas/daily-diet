@@ -3,14 +3,14 @@ import { mealGetData, mealGetAll } from "./mealGetAll";
 import { DataInfoDTO } from "./mealStorageDTO";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default async function mealDelete(title: string, hour: string){
+export default async function mealDelete(title: string, id: number){
   try {
     const mealsData = await mealGetData(title);
     const mealsAll = await mealGetAll();
     let newMealsData: DataInfoDTO[] = [];
 
     if(mealsData && mealsData.length > 0){
-      newMealsData = mealsData.filter((meal) => meal.hour !== hour);
+      newMealsData = mealsData.filter((meal) => meal.id !== id);
     }
     
     if(!mealsAll) return;

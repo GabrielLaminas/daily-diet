@@ -16,6 +16,7 @@ export declare global {
       Registration: undefined;
       InfoMeal: {
         title: string;
+        id: number;
         name: string;
         description: string;
         hour: string;
@@ -23,6 +24,7 @@ export declare global {
       },
       Edition: {
         title: string;
+        id: number;
         name: string;
         hour: string;
         description: string;
