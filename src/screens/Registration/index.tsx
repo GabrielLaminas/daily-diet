@@ -7,7 +7,7 @@ import {
 
 import mealCreate from "storage/meal/mealCreate";
 import { DataMealDTO } from "storage/meal/mealStorageDTO";
-import generateId from "utils/generateId";
+import generateId from "@utils/generateId";
 
 import Title from "@components/Title";
 import Input from "@components/Input";
