@@ -6,7 +6,7 @@ export declare global {
     interface RootParamList {
       Home: undefined;
       DietDetails: {
-        percent: string;
+        percent: number;
         variant: DietDatailsVariant;
         sequence: number;
         total_meal: number;

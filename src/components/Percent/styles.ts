@@ -2,7 +2,7 @@ import { TouchableOpacity } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
-export type PercentProps = "PRIMARY" | "SECONDARY";
+export type PercentProps = "SUCCESS" | "FAIL" | "NEUTRAL";
 
 type Props = {
   state: PercentProps;
@@ -13,7 +13,7 @@ const Container = styled(TouchableOpacity)`
   padding: 20px 16px;
   position: relative;
   border-radius: 8px;
-  background-color: ${({ theme, state }: { theme: DefaultTheme, state: Props["state"] }) => state === "PRIMARY" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+  background-color: ${({ theme, state }: { theme: DefaultTheme, state: Props["state"] }) => state === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : state === "FAIL" ? theme.COLORS.RED_LIGHT : theme.COLORS.GRAY_600 };
 `;
 
 const Icon = styled(ArrowUpRight).attrs({
@@ -22,7 +22,7 @@ const Icon = styled(ArrowUpRight).attrs({
   top: 8,
   right: 8,
 })`
-  color: ${({ theme, state }: { theme: DefaultTheme, state: Props["state"] }) => state === "PRIMARY" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
+  color: ${({ theme, state }: { theme: DefaultTheme, state: Props["state"] }) => state === "SUCCESS" ? theme.COLORS.GREEN_DARK : state === "FAIL" ? theme.COLORS.RED_DARK : theme.COLORS.GRAY_100 };
 `;
 
 const Title = styled.Text`
