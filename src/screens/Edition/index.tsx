@@ -1,16 +1,20 @@
 import { View } from "react-native";
-import React from "react";
+import { useState } from "react";
 import { 
-  Container, ContentContainer, ColumnContainer, RowContainer,
+  Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
   DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect 
 } from "./styles";
 import Title from "@components/Title";
 import Input from "@components/Input";
 import { ButtonFill } from "@components/Button";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { DataInfoDTO } from "storage/meal/mealStorageDTO";
+import mealEdit from "storage/meal/mealEdit";
+import { Alert } from "react-native";
 
 interface EditionProps {
   title: string;
+  id: number;
   name: string;
   hour: string;
   description: string;
@@ -21,17 +25,47 @@ export default function Edition() {
   const route = useRoute();
   const params = route.params as EditionProps;
 
+  const navigation = useNavigation();
+
+  const [title, setTitle] = useState(params.title);
+  const [name, setName] = useState(params.name);
+  const [description, setDescription] = useState(params.description);
+  const [hour, setHour] = useState(params.hour);
+  const [status, setStatus] = useState<SelectBoxProps>(params.status);
+  
+  function handleChangeStatus(status: SelectBoxProps){
+    setStatus(status);
+  }
+
+  function handleGoBack(){
+    navigation.goBack();
+  }
+
+  async function handleMealEdit(title: string, data: DataInfoDTO){
+    try {
+      await mealEdit(title, data);
+      navigation.navigate("InfoMeal", { title, id: data.id, name, description, hour, status });
+    } catch (error) {
+      if(error instanceof Error){
+        Alert.alert("Editar refeição", error.message);
+      }
+    }
+  }
+
   return (
     <Container>
       <Title 
         title="Editar refeição"
+        onPress={handleGoBack}
       />
 
       <ContentContainer>
         <ColumnContainer>
           <Input 
             label="Nome"
-            defaultValue={params.name}
+            value={name}
+            defaultValue={name}
+            onChangeText={(text) => setName(text)}
           />
 
           <Input 
@@ -39,7 +73,9 @@ export default function Edition() {
             multiline
             numberOfLines={4}
             autoCorrect={false}
-            defaultValue={params.description}
+            value={description}
+            defaultValue={description}
+            onChangeText={(text) => setDescription(text)}
             style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
           />
 
@@ -47,14 +83,19 @@ export default function Edition() {
             <View style={{flex: 1}}>
               <Input 
                 label="Data"
-                defaultValue={params.title}
+                value={title}
+                defaultValue={title}
+                readOnly
+                onChangeText={(text) => setTitle(text)}
               />
             </View>
 
             <View style={{flex: 1}}>
               <Input 
                 label="Hora"
-                defaultValue={params.hour}
+                value={hour}
+                defaultValue={hour}
+                onChangeText={(text) => setHour(text)}
               />
             </View>
           </RowContainer>
@@ -63,14 +104,20 @@ export default function Edition() {
             <LabelDiet>Está dentro da dieta?</LabelDiet>
 
             <RowContainer style={{ gap: 8 }}>
-              <ContainerSelect checked={params.status === "SUCCESS" ? "SUCCESS" : null}>
+              <ContainerSelect 
+                checked={status === "SUCCESS" ? "SUCCESS" : null}
+                onPress={() => handleChangeStatus("SUCCESS")}
+              >
                 <SelectView>
                   <Circle variant="SUCCESS" />
                   <TextSelect>Sim</TextSelect>
                 </SelectView>
               </ContainerSelect>
 
-              <ContainerSelect checked={params.status === "FAIL" ? "FAIL" : null}>
+              <ContainerSelect 
+                checked={status === "FAIL" ? "FAIL" : null}
+                onPress={() => handleChangeStatus("FAIL")}
+              >
                 <SelectView>
                   <Circle variant="FAIL" />
                   <TextSelect>Não</TextSelect>
@@ -83,6 +130,7 @@ export default function Edition() {
         <ButtonFill 
           text="Salvar alterações"
           variant="FILL"
+          onPress={() => handleMealEdit(title, { id: params.id, name, description, hour, status })}
         />
       </ContentContainer>
     </Container>

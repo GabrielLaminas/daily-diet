@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   function handleOpenInfoMeal({ title, meal }: { title: string, meal: DataInfoDTO }){
-    navigation.navigate("InfoMeal", { title: title, name: meal.name, description: meal.description, hour: meal.hour, status: meal.status });
+    navigation.navigate("InfoMeal", { title: title, id: meal.id, name: meal.name, description: meal.description, hour: meal.hour, status: meal.status });
   }
 
   useEffect(() => {
@@ -53,13 +53,13 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingVertical: 24, gap: 8}}
         sections={meals}
-        keyExtractor={(item) => item.hour}
-        renderItem={({item: { hour, description, status, name }, section: { title }}) => (
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({item: { id, hour, description, status, name }, section: { title }}) => (
           <Meal 
             hour={hour}
             description={description}
             status={status}
-            onPress={() => handleOpenInfoMeal({ title, meal: { name, hour, description, status }})}
+            onPress={() => handleOpenInfoMeal({ title, meal: { id, name, hour, description, status }})}
           />
         )}
         renderSectionHeader={({section: { title }}) => (

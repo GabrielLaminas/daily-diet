@@ -7,6 +7,7 @@ import {
 
 import mealCreate from "storage/meal/mealCreate";
 import { DataMealDTO } from "storage/meal/mealStorageDTO";
+import generateId from "@utils/generateId";
 
 import Title from "@components/Title";
 import Input from "@components/Input";
@@ -25,10 +26,12 @@ export default function Registration() {
 
   async function handleRegistrationMeal(){
     try {
+      const id = await generateId(date);
+
       const registration: DataMealDTO = {
         title: date,
         data: [
-          { name, description, hour, status}
+          { id: id ? id : 0, name, description, hour, status }
         ]
       }
   
@@ -43,6 +46,10 @@ export default function Registration() {
     }
   }
 
+  function handleGoHome(){
+    navigation.navigate("Home");
+  }
+
   function handleChangeStatusDiet(status: SelectBoxProps){
     setStatus(status);
   }
@@ -51,7 +58,9 @@ export default function Registration() {
     <Container>
       <Title 
         title="Nova refeição"
+        onPress={handleGoHome}
       />
+      
       <ContentContainer>
         <ColumnContainer>
           <Input 

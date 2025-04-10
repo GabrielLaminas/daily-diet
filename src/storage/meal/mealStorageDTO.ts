@@ -1,4 +1,5 @@
 interface DataInfoDTO {
+  id: number;
   name: string;
   description: string;
   hour: string;

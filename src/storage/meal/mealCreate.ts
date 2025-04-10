@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEAL_COLLECTION } from "storage/storageConfig";
-import { DataInfoDTO, DataMealDTO } from "./mealStorageDTO";
+import { DataMealDTO } from "./mealStorageDTO";
 import { mealGetAll, mealGetData } from "./mealGetAll";
+import { orderMealsHours, orderMealsTitle } from "@utils/orderMeals";
 
 export default async function mealCreate(meal: DataMealDTO){
   try {
@@ -38,19 +39,4 @@ export default async function mealCreate(meal: DataMealDTO){
   } catch (error) {
     throw error;
   }
-}
-
-function orderMealsHours(meals: DataInfoDTO[]){
-  return meals.sort((a, b) => b.hour.localeCompare(a.hour));
-}
-
-function parseDateString(dateStr: string) {
-  const [day, month, year] = dateStr.split('/');
-  return new Date(`${year}-${month}-${day}`);
-}
-
-function orderMealsTitle(meals: DataMealDTO[]){
-  return meals.sort((a, b) => {
-    return parseDateString(b.title).getTime() - parseDateString(a.title).getTime();
-  });
 }

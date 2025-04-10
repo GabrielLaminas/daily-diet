@@ -7,21 +7,21 @@ import { useNavigation } from "@react-navigation/native";
 
 type ModalDeleteProps = {
   title: string;
-  hour: string;
+  id: number;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function ModalDelete({ title, hour, visible, setVisible }: ModalDeleteProps) {
+export default function ModalDelete({ title, id, visible, setVisible }: ModalDeleteProps) {
   const navigation = useNavigation();
 
   function handleCloseModal(){
     setVisible(false);
   }
 
-  async function handleMealDelete(title: string, hour: string){
+  async function handleMealDelete(title: string, id: number){
     try {
-      await mealDelete(title, hour);
+      await mealDelete(title, id);
       setVisible(false);
       navigation.navigate("Home");
     } catch (error) {
@@ -54,7 +54,7 @@ export default function ModalDelete({ title, hour, visible, setVisible }: ModalD
               text="Sim, exluir"
               variant="FILL"
               style={{flex: 1}}
-              onPress={() => handleMealDelete(title, hour)}
+              onPress={() => handleMealDelete(title, id)}
             />
           </RowContainer>
         </Content>
