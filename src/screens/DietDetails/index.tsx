@@ -7,9 +7,10 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { ButtonBackIcon } from "@components/Button";
 import Box from "@components/Box";
+import formatPercentage from "@utils/formatPercentage";
 
 type DietDetailsProps = {
-  percent: string;
+  percent: number;
   variant: DietDatailsVariant;
   sequence: number;
   total_meal: number;
@@ -34,7 +35,7 @@ export default function DietDetails() {
           style={{marginBottom: -16}} 
           onPress={handleGoBack}
         />
-        <PercentTitle>{params.percent}%</PercentTitle>
+        <PercentTitle>{formatPercentage(params.percent)}%</PercentTitle>
         <PercentBody>das refeições dentro da dieta</PercentBody>
       </PercentContainer>
 
