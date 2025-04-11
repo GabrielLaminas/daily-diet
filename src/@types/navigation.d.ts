@@ -7,7 +7,7 @@ export declare global {
       Home: undefined;
       DietDetails: {
         percent: number;
-        variant: DietDatailsVariant;
+        variant: DietDatailsVariant | "NEUTRAL";
         sequence: number;
         total_meal: number;
         in_meal: number;
