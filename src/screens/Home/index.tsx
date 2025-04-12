@@ -59,10 +59,10 @@ export default function Home() {
 
   async function calculateStatistic(){
     try {
-      const mealStatistic = await statisticCalculated();
-      if(mealStatistic){
-        setTitlePercent(mealStatistic.percent);
-        setStatePercent(mealStatistic.variant);
+      const statistics = await statisticCalculated();
+      if(statistics){
+        setTitlePercent(statistics.percent);
+        setStatePercent(statistics.variant);
       }
     } catch (error) {
       console.log(error);
