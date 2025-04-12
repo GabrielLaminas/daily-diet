@@ -1,6 +1,6 @@
 import styled, { DefaultTheme } from "styled-components/native";
 
-type DietDatailsVariant = "SUCCESS" | "FAIL";
+type DietDatailsVariant = "SUCCESS" | "FAIL" | "NEUTRAL";
 
 type Props = {
   variant: DietDatailsVariant;
@@ -9,7 +9,7 @@ type Props = {
 const Container = styled.View`
   padding-top: 56px;
   flex: 1;
-  background-color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT };
+  background-color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : variant === "FAIL" ? theme.COLORS.RED_LIGHT : theme.COLORS.GRAY_600 };
 `;
 
 const PercentContainer = styled.View`
