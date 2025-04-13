@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { SectionList } from "react-native";
 import { Container } from "./styles";
 
@@ -9,10 +9,11 @@ import Percent from "@components/Percent";
 import NewMeal from "@components/NewMeal";
 import { Meal, TitleMeal } from "@components/Meal";
 
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { mealGetAll } from "storage/meal/mealGetAll";
 import statisticCalculated from "storage/statistic/statisticCalculated";
 import statisticGetAll from "storage/statistic/statisticGetAll";
+import EmptyList from "@components/EmptyList";
 
 type StateProps = "SUCCESS" | "FAIL" | "NEUTRAL";
 
@@ -71,12 +72,12 @@ export default function Home() {
 
   function handleOpenInfoMeal({ title, meal }: { title: string, meal: DataInfoDTO }){
     navigation.navigate("InfoMeal", { title: title, id: meal.id, name: meal.name, description: meal.description, hour: meal.hour, status: meal.status });
-  }
+  } 
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     calculateStatistic();
     getAllMeals();
-  }, []);
+  }, []));
 
   return (
     <Container>
@@ -90,7 +91,7 @@ export default function Home() {
 
       <SectionList 
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{paddingVertical: 24, gap: 8}}
+        contentContainerStyle={meals.length === 0 ? { flex: 1 } : { paddingVertical: 24, gap: 8 }}
         sections={meals}
         keyExtractor={(item) => String(item.id)}
         renderItem={({item: { id, hour, description, status, name }, section: { title }}) => (
@@ -103,6 +104,11 @@ export default function Home() {
         )}
         renderSectionHeader={({section: { title }}) => (
           <TitleMeal title={title} />
+        )}
+        ListEmptyComponent={() => (
+          <EmptyList 
+            message="Cadastre sua primeira refeição!" 
+          />
         )}
       />
     </Container>
