@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { SectionList } from "react-native";
-import { Container } from "./styles";
-
+import { Container, Loading, Gradient } from "./styles";
 import { DataMealDTO, DataInfoDTO } from "storage/meal/mealStorageDTO";
 
 import Header from "@components/Header";
@@ -19,6 +18,7 @@ type StateProps = "SUCCESS" | "FAIL" | "NEUTRAL";
 
 export default function Home() {
   const [meals, setMeals] = useState<DataMealDTO[]>([]);
+  const [loading, setLoading] = useState(false);
   const [titlePercent, setTitlePercent] = useState(0);
   const [statePercent, setStatePercent] = useState<StateProps>("NEUTRAL");
   const navigation = useNavigation();
@@ -49,12 +49,15 @@ export default function Home() {
 
   async function getAllMeals(){
     try {
+      setLoading(true);
       const allMeals = await mealGetAll();
       if(allMeals?.length){
         setMeals(allMeals)
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -89,28 +92,36 @@ export default function Home() {
       />
       <NewMeal onPress={handleOpenNewMeal} />
 
-      <SectionList 
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={meals.length === 0 ? { flex: 1 } : { paddingVertical: 24, gap: 8 }}
-        sections={meals}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({item: { id, hour, description, status, name }, section: { title }}) => (
-          <Meal 
-            hour={hour}
-            description={description}
-            status={status}
-            onPress={() => handleOpenInfoMeal({ title, meal: { id, name, hour, description, status }})}
+      { 
+        loading 
+        ? <Loading />
+        : (
+          <SectionList 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={meals.length === 0 ? { flex: 1 } : { paddingVertical: 24, gap: 8, paddingBottom: 160 }}
+            sections={meals}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({item: { id, hour, description, status, name }, section: { title }}) => (
+              <Meal 
+                hour={hour}
+                description={description}
+                status={status}
+                onPress={() => handleOpenInfoMeal({ title, meal: { id, name, hour, description, status }})}
+              />
+            )}
+            renderSectionHeader={({section: { title }}) => (
+              <TitleMeal title={title} />
+            )}
+            ListEmptyComponent={() => (
+              <EmptyList 
+                message="Cadastre sua primeira refeição!" 
+              />
+            )}
           />
-        )}
-        renderSectionHeader={({section: { title }}) => (
-          <TitleMeal title={title} />
-        )}
-        ListEmptyComponent={() => (
-          <EmptyList 
-            message="Cadastre sua primeira refeição!" 
-          />
-        )}
-      />
+        )
+      }
+
+      <Gradient  />
     </Container>
   );
 }
