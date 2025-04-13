@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 type VariantProps = "SUCCESS" | "FAIL";
 
@@ -19,7 +19,6 @@ const ContentContainer = styled.View`
 
 const ColumnContainer = styled.View`
   flex-direction: column;
-  /* gap: 24px; */
 `;
 
 const InfoContainer = styled.View`
@@ -28,27 +27,35 @@ const InfoContainer = styled.View`
 `;
 
 const MealTitle = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
   font-size: 20px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+  `};
 `;
 
 const MealDescription = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.BASE }px;
+  `};
 `;
 
 const DateTimeTitle = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};
 `;
 
 const DateTimeInfo = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.BASE }px;
+  `};
 `;
 
 const TagContainer = styled.View`
@@ -69,9 +76,11 @@ const TagCircle = styled.View`
 `;
 
 const TagInfo = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};
 `;
 
 export { 

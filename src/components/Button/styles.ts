@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 import { ArrowLeft } from "phosphor-react-native";
 
 type ButtonsVariantsProps = "FILL" | "OUTLINE";
@@ -19,16 +19,20 @@ const Fill = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background-color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.GRAY_200 : "transparent" };
-  border: 1px solid ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.GRAY_200 : theme.COLORS.GRAY_100 };
   border-radius: 6px;
+  ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => css`
+    background-color: ${ variant === "FILL" ? theme.COLORS.GRAY_200 : "transparent" };
+    border: 1px solid ${ variant === "FILL" ? theme.COLORS.GRAY_200 : theme.COLORS.GRAY_100 };
+  `};
 `;
 
 const TextButton = styled.Text`
-  color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "FILL" ? theme.COLORS.WHITE : theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
   text-align: center;
+  ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => css`
+    color: ${ variant === "FILL" ? theme.COLORS.WHITE : theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};  
 `;
 
 const ButtonBack = styled.TouchableOpacity`

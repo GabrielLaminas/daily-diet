@@ -1,13 +1,15 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 const Container = styled.View`
   gap: 4px;
 `;
 
 const Label = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};
 `;
 
 const TextInput = styled.TextInput`
@@ -15,11 +17,13 @@ const TextInput = styled.TextInput`
   max-height: 48px;
   width: 100%;
   padding: 14px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
-  border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_500 };
   border-radius: 6px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.BASE }px;
+    border: 1px solid ${ theme.COLORS.GRAY_500 };
+  `}
 `;
 
 export { Container, Label, TextInput };

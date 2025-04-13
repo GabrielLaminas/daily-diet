@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 const Container = styled.View`
   flex: 1;
@@ -18,11 +18,14 @@ const Content = styled.View`
 const Title = styled.Text`
   margin-bottom: 32px;
   padding: 0 24px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG }px;
   text-align: center;
-`
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.LG }px;
+  `};
+  
+`;
 
 const RowContainer = styled.View`
   flex-direction: row;
