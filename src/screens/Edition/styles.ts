@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 type SelectBoxProps = "SUCCESS" | "FAIL" | "NEUTRAL";
 type VariantProps = Exclude<SelectBoxProps, "NEUTRAL">;
@@ -36,18 +36,22 @@ const DietContainer = styled.View``;
 
 const LabelDiet = styled.Text`
   margin-bottom: 8px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};
 `;
 
 const ContainerSelect = styled.TouchableOpacity`
   padding: 16px;
   flex: 1;
   gap: 8px;
-  background-color: ${({ theme, checked }: { theme: DefaultTheme, checked: Props["checked"] }) => checked === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : checked === "FAIL" ? theme.COLORS.RED_LIGHT : theme.COLORS.GRAY_600 };
-  border: 1px solid ${({ theme, checked }: { theme: DefaultTheme, checked: Props["checked"] }) => checked === "SUCCESS" ? theme.COLORS.GREEN_DARK : checked === "FAIL" ? theme.COLORS.RED_DARK : theme.COLORS.GRAY_600 };
   border-radius: 6px;
+  ${({ theme, checked }: { theme: DefaultTheme, checked: Props["checked"] }) => css`
+    background-color: ${ checked === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : checked === "FAIL" ? theme.COLORS.RED_LIGHT : theme.COLORS.GRAY_600 };
+    border: 1px solid ${ checked === "SUCCESS" ? theme.COLORS.GREEN_DARK : checked === "FAIL" ? theme.COLORS.RED_DARK : theme.COLORS.GRAY_600 };
+  `};
 `;
 
 const SelectView = styled.View`
@@ -65,9 +69,11 @@ const Circle = styled.View`
 `;
 
 const TextSelect = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+  `};
 `;
 
 export { 

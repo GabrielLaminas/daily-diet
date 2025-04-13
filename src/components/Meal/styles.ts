@@ -1,5 +1,5 @@
 import { TouchableOpacity } from "react-native";
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 type StatusProps = "SUCCESS" | "FAIL";
 
@@ -26,29 +26,37 @@ const FlexContainer = styled.View`
 `;
 
 const Title = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.LG }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.LG }px;
+  `};
 `;
 
 const Hour = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.XS }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE.XS }px;
+  `};
 `;
 
 const Divisor = styled.Text`
   flex-shrink: 0;
   width: 1px;
-  height: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
-  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_400 };
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    height: ${ theme.FONT_SIZE.SM }px;
+    background-color: ${ theme.COLORS.GRAY_400 };
+  `};
 `;
 
 const Description = styled.Text`
   flex: 1;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.BASE }px;
+  `};
 `;
 
 const Status = styled.Text`

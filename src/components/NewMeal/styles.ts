@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 const Container = styled.View`
   width: 100%;
@@ -6,9 +6,11 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR};
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE}px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR};
+    font-size: ${ theme.FONT_SIZE.BASE}px;
+  `};
 `;
 
 export { Container, Title };

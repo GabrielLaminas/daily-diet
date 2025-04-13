@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 type VariantFeedback = "SUCCESS" | "FAIL";
 
@@ -16,16 +16,20 @@ const Container = styled.View`
 const Title = styled.Text`
   margin-bottom: 8px;
   text-align: center;
-  color: ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => variant === "SUCCESS" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE["2XL"] }px;
+  ${({ theme, variant }: { theme: DefaultTheme, variant: Props["variant"] }) => css`
+    color: ${ variant === "SUCCESS" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK };
+    font-family: ${ theme.FONT_FAMILY.BOLD };
+    font-size: ${ theme.FONT_SIZE["2XL"] }px;
+  `};
 `;
 
 const Description = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.BASE }px;
   text-align: center;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.BASE }px;
+  `};
 `;
 
 const TextBold = styled.Text`

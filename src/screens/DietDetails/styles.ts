@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components/native";
+import styled, { DefaultTheme, css } from "styled-components/native";
 
 type DietDatailsVariant = "SUCCESS" | "FAIL" | "NEUTRAL";
 
@@ -19,17 +19,21 @@ const PercentContainer = styled.View`
 `;
 
 const PercentTitle = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE["3XL"] }px;
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD }; 
   text-align: center;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-size: ${ theme.FONT_SIZE["3XL"] }px;
+    font-family: ${ theme.FONT_FAMILY.BOLD }; 
+  `};
 `;
 
 const PercentBody = styled.Text`
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_200 };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.REGULAR }; 
   text-align: center;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_200 };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+    font-family: ${ theme.FONT_FAMILY.REGULAR }; 
+  `};
 `;
 
 const ContentContainer = styled.View`
@@ -42,10 +46,12 @@ const ContentContainer = styled.View`
 
 const ContentContainerTitle = styled.Text`
   margin-bottom: 23px;
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_100 };
-  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_SIZE.SM }px;
-  font-family: ${({ theme }: { theme: DefaultTheme }) => theme.FONT_FAMILY.BOLD }; 
   text-align: center;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.GRAY_100 };
+    font-size: ${ theme.FONT_SIZE.SM }px;
+    font-family: ${ theme.FONT_FAMILY.BOLD }; 
+  `};
 `;
 
 const ColumnContainer = styled.View`
