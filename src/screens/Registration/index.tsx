@@ -1,9 +1,11 @@
-import { View, Alert } from "react-native";
+import { View, Alert, Keyboard, Pressable } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
   DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect
 } from "./styles";
+
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 
 import mealCreate from "storage/meal/mealCreate";
 import { DataMealDTO } from "storage/meal/mealStorageDTO";
@@ -18,8 +20,8 @@ import { useNavigation } from "@react-navigation/native";
 export default function Registration() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [hour, setHour] = useState("");
+  const [date, setDate] = useState<string | Date>("");
+  const [hour, setHour] = useState<string | Date>("");
   const [status, setStatus] = useState<SelectBoxProps>("NEUTRAL");
 
   const navigation = useNavigation();
@@ -54,6 +56,40 @@ export default function Registration() {
     setStatus(status);
   }
 
+  function handleSetDate(){
+    Keyboard.dismiss();
+    DateTimePickerAndroid.dismiss("time");
+    DateTimePickerAndroid.open({
+      mode: "date",
+      display: "calendar",
+      value: date instanceof Date ? date : new Date(),
+      onChange: (event, selectedDate) => {
+        if (selectedDate && event.type !== "dismissed") {
+          const formatDate = selectedDate.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
+          setDate(formatDate);
+        }
+      },
+    });
+  }
+
+  function handleSetTime(){
+    Keyboard.dismiss();
+    DateTimePickerAndroid.dismiss("date");
+    DateTimePickerAndroid.open({
+      mode: "time",
+      display: "clock",
+      timeZoneName: "America/Sao_Paulo",
+      is24Hour: true,
+      value: hour instanceof Date ? hour : new Date(),
+      onChange: (event, selectTime) => {
+        if(selectTime && event.type !== "dismissed"){
+          const formatTime = selectTime.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+          setHour(formatTime);
+        }
+      }
+    });
+  }
+
   return (
     <Container>
       <Title 
@@ -83,16 +119,16 @@ export default function Registration() {
             <View style={{flex: 1}}>
               <Input 
                 label="Data"
-                value={date}
-                onChangeText={(text) => setDate(text)}
+                value={date.toString()}
+                onFocus={handleSetDate}
               />
             </View>
 
             <View style={{flex: 1}}>
               <Input 
                 label="Hora"
-                value={hour}
-                onChangeText={(text) => setHour(text)}
+                value={hour.toString()}
+                onFocus={handleSetTime}
               />
             </View>
           </RowContainer>
