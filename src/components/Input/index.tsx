@@ -1,19 +1,22 @@
-import { TextInputProps } from "react-native";
-import React from "react";
-import { Container, Label, TextInput } from "./styles";
+import { TextInput, TextInputProps } from "react-native";
+import React, { forwardRef } from "react";
+import { Container, Label, TextInput as TextInputStyle } from "./styles";
 
 type InputProps = TextInputProps & {
   label: string;
 }
 
-export default function Input({ label, ...rest }: InputProps) {
+const Input = forwardRef<TextInput, InputProps>(({ label, ...rest }, ref) => {
   return (
     <Container>
       <Label>{label}</Label>
 
-      <TextInput 
+      <TextInputStyle 
+        ref={ref}
         {...rest}
       />
     </Container>
-  );
-}
+  )
+})
+
+export default Input;

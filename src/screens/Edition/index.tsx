@@ -1,22 +1,25 @@
-import { View } from "react-native";
+import { View, Alert, Keyboard } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
   DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect 
 } from "./styles";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+
+import { useRoute, useNavigation } from "@react-navigation/native";
+
 import Title from "@components/Title";
 import Input from "@components/Input";
 import { ButtonFill } from "@components/Button";
-import { useRoute, useNavigation } from "@react-navigation/native";
+
 import { DataInfoDTO } from "storage/meal/mealStorageDTO";
 import mealEdit from "storage/meal/mealEdit";
-import { Alert } from "react-native";
 
 interface EditionProps {
   title: string;
   id: number;
   name: string;
-  hour: string;
+  hour: string | Date;
   description: string;
   status: "SUCCESS" | "FAIL";
 }
@@ -30,7 +33,7 @@ export default function Edition() {
   const [title, setTitle] = useState(params.title);
   const [name, setName] = useState(params.name);
   const [description, setDescription] = useState(params.description);
-  const [hour, setHour] = useState(params.hour);
+  const [hour, setHour] = useState<string | Date>(params.hour);
   const [status, setStatus] = useState<SelectBoxProps>(params.status);
   
   function handleChangeStatus(status: SelectBoxProps){
@@ -50,6 +53,24 @@ export default function Edition() {
         Alert.alert("Editar refeição", error.message);
       }
     }
+  }
+
+  function handleSetTime(){
+    Keyboard.dismiss();
+    DateTimePickerAndroid.dismiss("date");
+    DateTimePickerAndroid.open({
+      mode: "time",
+      display: "clock",
+      timeZoneName: "America/Sao_Paulo",
+      is24Hour: true,
+      value: hour instanceof Date ? hour : new Date(),
+      onChange: (event, selectTime) => {
+        if(selectTime && event.type !== "dismissed"){
+          const formatTime = selectTime.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+          setHour(formatTime);
+        }
+      }
+    });
   }
 
   return (
@@ -93,9 +114,9 @@ export default function Edition() {
             <View style={{flex: 1}}>
               <Input 
                 label="Hora"
-                value={hour}
-                defaultValue={hour}
-                onChangeText={(text) => setHour(text)}
+                value={hour.toString()}
+                defaultValue={hour.toString()}
+                onFocus={handleSetTime}
               />
             </View>
           </RowContainer>
