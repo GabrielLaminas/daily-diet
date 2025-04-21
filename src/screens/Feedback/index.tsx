@@ -1,4 +1,4 @@
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 import React from "react";
 import { Container, Title, Description, TextBold, VariantFeedback } from "./styles";
 import { ButtonFill } from "@components/Button";
@@ -20,36 +20,41 @@ export default function Feedback() {
   }
   
   return (
-    <Container>
-      <Title variant={params.status}>
-        { params.status === "SUCCESS" ? "Continue assim!" : "Que pena!" }
-      </Title>
+    <ScrollView 
+      showsVerticalScrollIndicator={false} 
+      contentContainerStyle={{ flexGrow: 1 }} 
+    >
+      <Container>
+        <Title variant={params.status}>
+          { params.status === "SUCCESS" ? "Continue assim!" : "Que pena!" }
+        </Title>
 
-      {
-        params.status === "SUCCESS" 
-        ? (
-          <Description>
-            Você continua <TextBold>dentro da dieta</TextBold>. Muito bem!
-          </Description>
-        )
-        : (
-          <Description>
-            Você <TextBold>saiu da dieta</TextBold> dessa vez, mas continue se esforçando e não desista!
-          </Description>
-        )
-      }
+        {
+          params.status === "SUCCESS" 
+          ? (
+            <Description>
+              Você continua <TextBold>dentro da dieta</TextBold>. Muito bem!
+            </Description>
+          )
+          : (
+            <Description>
+              Você <TextBold>saiu da dieta</TextBold> dessa vez, mas continue se esforçando e não desista!
+            </Description>
+          )
+        }
 
-      <Image 
-        source={ params.status === "SUCCESS" ? success : fail} 
-        resizeMode="cover"
-        style={{marginTop: 40, marginBottom: 32}} 
-      />
-    
-      <ButtonFill 
-        text="Ir para a página inicial" 
-        variant="FILL" 
-        onPress={handleGoBackHome}
-      />
-    </Container>
+        <Image 
+          source={ params.status === "SUCCESS" ? success : fail} 
+          resizeMode="cover"
+          style={{marginTop: 40, marginBottom: 32}} 
+        />
+      
+        <ButtonFill 
+          text="Ir para a página inicial" 
+          variant="FILL" 
+          onPress={handleGoBackHome}
+        />
+      </Container>
+    </ScrollView>
   )
 }

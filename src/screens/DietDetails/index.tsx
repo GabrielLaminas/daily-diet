@@ -8,6 +8,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { ButtonBackIcon } from "@components/Button";
 import Box from "@components/Box";
 import formatPercentage from "@utils/formatPercentage";
+import { ScrollView } from "react-native";
 
 type DietDetailsProps = {
   percent: number;
@@ -39,39 +40,44 @@ export default function DietDetails() {
         <PercentBody>das refeições dentro da dieta</PercentBody>
       </PercentContainer>
 
-      <ContentContainer>
-        <ContentContainerTitle>Estatísticas gerais</ContentContainerTitle>
+      <ScrollView
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <ContentContainer>
+          <ContentContainerTitle>Estatísticas gerais</ContentContainerTitle>
 
-        <ColumnContainer>
-          <Box 
-            title={params.sequence}
-            body="melhor sequência de pratos dentro da dieta"
-            variant="NEUTRAL"
-          />
-
-          <Box 
-            title={params.total_meal}
-            body="refeições registradas"
-            variant="NEUTRAL"
-          />
-
-          <RowContainer>
+          <ColumnContainer>
             <Box 
-              title={params.in_meal}
-              body="refeições dentro da dieta"
-              variant="SUCCESS"
-              style={{flex: 1}}
+              title={params.sequence}
+              body="melhor sequência de pratos dentro da dieta"
+              variant="NEUTRAL"
             />
 
             <Box 
-              title={params.out_meal}
-              body="refeições fora da dieta"
-              variant="FAIL"
-              style={{flex: 1}}
+              title={params.total_meal}
+              body="refeições registradas"
+              variant="NEUTRAL"
             />
-          </RowContainer>
-        </ColumnContainer>
-      </ContentContainer>
+
+            <RowContainer>
+              <Box 
+                title={params.in_meal}
+                body="refeições dentro da dieta"
+                variant="SUCCESS"
+                style={{flex: 1}}
+              />
+
+              <Box 
+                title={params.out_meal}
+                body="refeições fora da dieta"
+                variant="FAIL"
+                style={{flex: 1}}
+              />
+            </RowContainer>
+          </ColumnContainer>
+        </ContentContainer>
+      </ScrollView>
     </Container>
   );
 }

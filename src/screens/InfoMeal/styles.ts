@@ -14,7 +14,7 @@ const ContentContainer = styled.View`
   padding: 40px 24px;
   background-color: ${({ theme }: { theme: DefaultTheme }) => theme.COLORS.GRAY_700 };
   border-radius: 20px 20px 0 0;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
 `;  
 
 const ColumnContainer = styled.View`

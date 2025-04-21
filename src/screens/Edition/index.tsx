@@ -1,4 +1,4 @@
-import { View, Alert, Keyboard } from "react-native";
+import { View, Alert, Keyboard, ScrollView } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
@@ -79,81 +79,86 @@ export default function Edition() {
         title="Editar refeição"
         onPress={handleGoBack}
       />
-
-      <ContentContainer>
-        <ColumnContainer>
-          <Input 
-            label="Nome"
-            value={name}
-            defaultValue={name}
-            onChangeText={(text) => setName(text)}
-          />
-
-          <Input 
-            label="Descrição"
-            multiline
-            numberOfLines={4}
-            autoCorrect={false}
-            value={description}
-            defaultValue={description}
-            onChangeText={(text) => setDescription(text)}
-            style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
-          />
-
-          <RowContainer style={{ gap: 20 }}>
-            <View style={{flex: 1}}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={{ flexGrow: 1 }} 
+        //permite que toques fora dos inputs fechem o teclado e continuem interagindo normalmente.
+        keyboardShouldPersistTaps="handled">
+          <ContentContainer>
+            <ColumnContainer>
               <Input 
-                label="Data"
-                value={title}
-                defaultValue={title}
-                readOnly
-                onChangeText={(text) => setTitle(text)}
+                label="Nome"
+                value={name}
+                defaultValue={name}
+                onChangeText={(text) => setName(text)}
               />
-            </View>
 
-            <View style={{flex: 1}}>
               <Input 
-                label="Hora"
-                value={hour.toString()}
-                defaultValue={hour.toString()}
-                onFocus={handleSetTime}
+                label="Descrição"
+                multiline
+                numberOfLines={4}
+                autoCorrect={false}
+                value={description}
+                defaultValue={description}
+                onChangeText={(text) => setDescription(text)}
+                style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
               />
-            </View>
-          </RowContainer>
 
-          <DietContainer>
-            <LabelDiet>Está dentro da dieta?</LabelDiet>
+              <RowContainer style={{ gap: 20 }}>
+                <View style={{flex: 1}}>
+                  <Input 
+                    label="Data"
+                    value={title}
+                    defaultValue={title}
+                    readOnly
+                    onChangeText={(text) => setTitle(text)}
+                  />
+                </View>
 
-            <RowContainer style={{ gap: 8 }}>
-              <ContainerSelect 
-                checked={status === "SUCCESS" ? "SUCCESS" : null}
-                onPress={() => handleChangeStatus("SUCCESS")}
-              >
-                <SelectView>
-                  <Circle variant="SUCCESS" />
-                  <TextSelect>Sim</TextSelect>
-                </SelectView>
-              </ContainerSelect>
+                <View style={{flex: 1}}>
+                  <Input 
+                    label="Hora"
+                    value={hour.toString()}
+                    defaultValue={hour.toString()}
+                    onFocus={handleSetTime}
+                  />
+                </View>
+              </RowContainer>
 
-              <ContainerSelect 
-                checked={status === "FAIL" ? "FAIL" : null}
-                onPress={() => handleChangeStatus("FAIL")}
-              >
-                <SelectView>
-                  <Circle variant="FAIL" />
-                  <TextSelect>Não</TextSelect>
-                </SelectView>
-              </ContainerSelect>
-            </RowContainer>
-          </DietContainer>
-        </ColumnContainer>
+              <DietContainer>
+                <LabelDiet>Está dentro da dieta?</LabelDiet>
 
-        <ButtonFill 
-          text="Salvar alterações"
-          variant="FILL"
-          onPress={() => handleMealEdit(title, { id: params.id, name, description, hour, status })}
-        />
-      </ContentContainer>
+                <RowContainer style={{ gap: 8 }}>
+                  <ContainerSelect 
+                    checked={status === "SUCCESS" ? "SUCCESS" : null}
+                    onPress={() => handleChangeStatus("SUCCESS")}
+                  >
+                    <SelectView>
+                      <Circle variant="SUCCESS" />
+                      <TextSelect>Sim</TextSelect>
+                    </SelectView>
+                  </ContainerSelect>
+
+                  <ContainerSelect 
+                    checked={status === "FAIL" ? "FAIL" : null}
+                    onPress={() => handleChangeStatus("FAIL")}
+                  >
+                    <SelectView>
+                      <Circle variant="FAIL" />
+                      <TextSelect>Não</TextSelect>
+                    </SelectView>
+                  </ContainerSelect>
+                </RowContainer>
+              </DietContainer>
+            </ColumnContainer>
+
+            <ButtonFill 
+              text="Salvar alterações"
+              variant="FILL"
+              onPress={() => handleMealEdit(title, { id: params.id, name, description, hour, status })}
+            />
+          </ContentContainer>
+      </ScrollView>
     </Container>
   );
 }

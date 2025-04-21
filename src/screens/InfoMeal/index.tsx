@@ -7,6 +7,7 @@ import Title from "@components/Title";
 import { ButtonFill } from "@components/Button";
 import ModalDelete from "@components/Modal";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native";
 
 interface InfoMealProps {
   title: string;
@@ -42,41 +43,46 @@ export default function InfoMeal() {
         onPress={handleBackHome}
       />
 
-      <ContentContainer>
-        <ColumnContainer>
-          <InfoContainer>
-            <MealTitle>{params.name}</MealTitle>
-            <MealDescription>{params.description}</MealDescription>
-          </InfoContainer>
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={{ flexGrow: 1 }} 
+      >
+        <ContentContainer>
+          <ColumnContainer>
+            <InfoContainer>
+              <MealTitle numberOfLines={2}>{params.name}</MealTitle>
+              <MealDescription numberOfLines={4}>{params.description}</MealDescription>
+            </InfoContainer>
 
-          <InfoContainer>
-            <DateTimeTitle>Data e hora</DateTimeTitle>
-            <DateTimeInfo>{params.title} às {params.hour}</DateTimeInfo>
-          </InfoContainer>
+            <InfoContainer>
+              <DateTimeTitle>Data e hora</DateTimeTitle>
+              <DateTimeInfo>{params.title} às {params.hour}</DateTimeInfo>
+            </InfoContainer>
 
-          <TagContainer>
-            <TagCircle variant={params.status} />
-            <TagInfo>{ params.status === "SUCCESS" ? "dentro da dieta" : "fora da dieta"}</TagInfo>
-          </TagContainer>
-        </ColumnContainer>
+            <TagContainer>
+              <TagCircle variant={params.status} />
+              <TagInfo>{ params.status === "SUCCESS" ? "dentro da dieta" : "fora da dieta"}</TagInfo>
+            </TagContainer>
+          </ColumnContainer>
 
-        <ColumnContainer>
-          <ButtonFill 
-            text="Editar refeição"
-            variant="FILL"
-            name="edit-3"
-            style={{marginBottom: 9}}
-            onPress={handleOpenEditScreen}
-          />
+          <ColumnContainer>
+            <ButtonFill 
+              text="Editar refeição"
+              variant="FILL"
+              name="edit-3"
+              style={{marginBottom: 9, marginTop: 24}}
+              onPress={handleOpenEditScreen}
+            />
 
-          <ButtonFill 
-            text="Excluir refeição"
-            variant="OUTLINE"
-            name="trash-2"
-            onPress={handleOpenModal}
-          />
-        </ColumnContainer>
-      </ContentContainer>
+            <ButtonFill 
+              text="Excluir refeição"
+              variant="OUTLINE"
+              name="trash-2"
+              onPress={handleOpenModal}
+            />
+          </ColumnContainer>
+        </ContentContainer>
+      </ScrollView>
 
       <ModalDelete 
         title={params.title}

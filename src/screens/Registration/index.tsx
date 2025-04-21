@@ -1,4 +1,4 @@
-import { View, Alert, Keyboard, Pressable } from "react-native";
+import { View, Alert, Keyboard, ScrollView } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
@@ -96,76 +96,83 @@ export default function Registration() {
         title="Nova refeição"
         onPress={handleGoHome}
       />
-      
-      <ContentContainer>
-        <ColumnContainer>
-          <Input 
-            label="Nome"
-            value={name}
-            onChangeText={(text) => setName(text)}
-          />
 
-          <Input 
-            label="Descrição"
-            multiline
-            numberOfLines={4}
-            autoCorrect={false}
-            value={description}
-            onChangeText={(text) => setDescription(text)}
-            style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
-          />
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={{ flexGrow: 1 }} 
+        //permite que toques fora dos inputs fechem o teclado e continuem interagindo normalmente.
+        keyboardShouldPersistTaps="handled"
+      >
+        <ContentContainer>
+          <ColumnContainer>
+            <Input 
+              label="Nome"
+              value={name}
+              onChangeText={(text) => setName(text)}
+            />
 
-          <RowContainer style={{ gap: 20 }}>
-            <View style={{flex: 1}}>
-              <Input 
-                label="Data"
-                value={date.toString()}
-                onFocus={handleSetDate}
-              />
-            </View>
+            <Input 
+              label="Descrição"
+              multiline
+              numberOfLines={4}
+              autoCorrect={false}
+              value={description}
+              onChangeText={(text) => setDescription(text)}
+              style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
+            />
 
-            <View style={{flex: 1}}>
-              <Input 
-                label="Hora"
-                value={hour.toString()}
-                onFocus={handleSetTime}
-              />
-            </View>
-          </RowContainer>
+            <RowContainer style={{ gap: 20 }}>
+              <View style={{flex: 1}}>
+                <Input 
+                  label="Data"
+                  value={date.toString()}
+                  onFocus={handleSetDate}
+                />
+              </View>
 
-          <DietContainer>
-            <LabelDiet>Está dentro da dieta?</LabelDiet>
-
-            <RowContainer style={{ gap: 8 }}>
-              <ContainerSelect 
-                onPress={() => handleChangeStatusDiet("SUCCESS")} 
-                checked={status === "SUCCESS" ? "SUCCESS" : "NEUTRAL"}
-              >
-                <SelectView>
-                  <Circle variant="SUCCESS" />
-                  <TextSelect>Sim</TextSelect>
-                </SelectView>
-              </ContainerSelect>
-
-              <ContainerSelect 
-                onPress={() => handleChangeStatusDiet("FAIL")} 
-                checked={status === "FAIL" ? "FAIL" : "NEUTRAL"}
-              >
-                <SelectView>
-                  <Circle variant="FAIL" />
-                  <TextSelect>Não</TextSelect>
-                </SelectView>
-              </ContainerSelect>
+              <View style={{flex: 1}}>
+                <Input 
+                  label="Hora"
+                  value={hour.toString()}
+                  onFocus={handleSetTime}
+                />
+              </View>
             </RowContainer>
-          </DietContainer>
-        </ColumnContainer>
 
-        <ButtonFill 
-          text="Cadastrar refeição"
-          variant="FILL"
-          onPress={() => handleRegistrationMeal()}
-        />
-      </ContentContainer>
+            <DietContainer>
+              <LabelDiet>Está dentro da dieta?</LabelDiet>
+
+              <RowContainer style={{ gap: 8 }}>
+                <ContainerSelect 
+                  onPress={() => handleChangeStatusDiet("SUCCESS")} 
+                  checked={status === "SUCCESS" ? "SUCCESS" : "NEUTRAL"}
+                >
+                  <SelectView>
+                    <Circle variant="SUCCESS" />
+                    <TextSelect>Sim</TextSelect>
+                  </SelectView>
+                </ContainerSelect>
+
+                <ContainerSelect 
+                  onPress={() => handleChangeStatusDiet("FAIL")} 
+                  checked={status === "FAIL" ? "FAIL" : "NEUTRAL"}
+                >
+                  <SelectView>
+                    <Circle variant="FAIL" />
+                    <TextSelect>Não</TextSelect>
+                  </SelectView>
+                </ContainerSelect>
+              </RowContainer>
+            </DietContainer>
+          </ColumnContainer>
+
+          <ButtonFill 
+            text="Cadastrar refeição"
+            variant="FILL"
+            onPress={() => handleRegistrationMeal()}
+          />
+        </ContentContainer>
+      </ScrollView>
     </Container>
   );
 }
