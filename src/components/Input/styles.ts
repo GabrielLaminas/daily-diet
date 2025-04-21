@@ -16,7 +16,8 @@ const TextInput = styled.TextInput`
   height: 48px;
   max-height: 48px;
   width: 100%;
-  padding: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
   border-radius: 6px;
   ${({ theme }: { theme: DefaultTheme }) => css`
     color: ${ theme.COLORS.GRAY_100 };
@@ -26,4 +27,13 @@ const TextInput = styled.TextInput`
   `}
 `;
 
-export { Container, Label, TextInput };
+const ErrorText = styled.Text`
+  margin-top: 2px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.RED_DARK };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.XS }px;
+  `}
+`
+
+export { Container, Label, TextInput, ErrorText };

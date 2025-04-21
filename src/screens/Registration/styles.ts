@@ -78,7 +78,16 @@ const TextSelect = styled.Text`
   `};
 `;
 
+const ErrorText = styled.Text`
+  margin-top: 2px;
+  ${({ theme }: { theme: DefaultTheme }) => css`
+    color: ${ theme.COLORS.RED_DARK };
+    font-family: ${ theme.FONT_FAMILY.REGULAR };
+    font-size: ${ theme.FONT_SIZE.XS }px;
+  `}
+`
+
 export { 
-  Container, ContentContainer, ColumnContainer, RowContainer, 
+  Container, ContentContainer, ColumnContainer, RowContainer, ErrorText,
   DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, SelectBoxProps
 };
