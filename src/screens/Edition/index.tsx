@@ -110,7 +110,7 @@ export default function Edition() {
                     label="Data"
                     value={title}
                     defaultValue={title}
-                    readOnly
+                    isReadOnly={true}
                     onChangeText={(text) => setTitle(text)}
                   />
                 </View>
