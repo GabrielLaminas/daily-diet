@@ -14,6 +14,8 @@ import { ButtonFill } from "@components/Button";
 
 import { DataInfoDTO } from "storage/meal/mealStorageDTO";
 import mealEdit from "storage/meal/mealEdit";
+import { ValidationError } from "yup";
+import { mealSchema } from "validations/validationFields";
 
 interface EditionProps {
   title: string;
@@ -27,7 +29,6 @@ interface EditionProps {
 export default function Edition() {
   const route = useRoute();
   const params = route.params as EditionProps;
-
   const navigation = useNavigation();
 
   const [title, setTitle] = useState(params.title);
@@ -35,6 +36,13 @@ export default function Edition() {
   const [description, setDescription] = useState(params.description);
   const [hour, setHour] = useState<string | Date>(params.hour);
   const [status, setStatus] = useState<SelectBoxProps>(params.status);
+  const [errors, setErrors] = useState<Record<string, string>>({
+    name: "",
+    description: "",
+    date: "",
+    hour: "",
+    status: ""
+  });
   
   function handleChangeStatus(status: SelectBoxProps){
     setStatus(status);
@@ -46,9 +54,30 @@ export default function Edition() {
 
   async function handleMealEdit(title: string, data: DataInfoDTO){
     try {
-      await mealEdit(title, data);
-      navigation.navigate("InfoMeal", { title, id: data.id, name, description, hour, status });
+      const meal = await mealSchema.validate({
+        name: data.name, 
+        description: data.description, 
+        date: title, 
+        hour: data.hour, 
+        status: data.status
+      }, {abortEarly: false});
+
+      if(meal.name && meal.description && meal.date && meal.hour && meal.status){
+        await mealEdit(title, data);
+        navigation.navigate("InfoMeal", { title, id: data.id, name, description, hour: hour.toString(), status });
+      }
     } catch (error) {
+      if(error instanceof ValidationError){
+        const formErrors: Record<string, string> = {};
+
+        error.inner.forEach((err) => {
+          if (err.path && err.message) {
+            formErrors[err.path] = err.message;
+          }
+        });
+        setErrors(formErrors);
+      }
+
       if(error instanceof Error){
         Alert.alert("Editar refeição", error.message);
       }
@@ -89,6 +118,7 @@ export default function Edition() {
               <Input 
                 label="Nome"
                 value={name}
+                error={errors.name}
                 defaultValue={name}
                 onChangeText={(text) => setName(text)}
               />
@@ -100,6 +130,7 @@ export default function Edition() {
                 autoCorrect={false}
                 value={description}
                 defaultValue={description}
+                error={errors.description}
                 onChangeText={(text) => setDescription(text)}
                 style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
               />
@@ -110,7 +141,8 @@ export default function Edition() {
                     label="Data"
                     value={title}
                     defaultValue={title}
-                    readOnly
+                    isReadOnly={true}
+                    error={errors.date}
                     onChangeText={(text) => setTitle(text)}
                   />
                 </View>
@@ -119,6 +151,7 @@ export default function Edition() {
                   <Input 
                     label="Hora"
                     value={hour.toString()}
+                    error={errors.hour}
                     defaultValue={hour.toString()}
                     onFocus={handleSetTime}
                   />
@@ -155,7 +188,7 @@ export default function Edition() {
             <ButtonFill 
               text="Salvar alterações"
               variant="FILL"
-              onPress={() => handleMealEdit(title, { id: params.id, name, description, hour, status })}
+              onPress={() => handleMealEdit(title, { id: params.id, name, description, hour: hour.toString(), status })}
             />
           </ContentContainer>
       </ScrollView>

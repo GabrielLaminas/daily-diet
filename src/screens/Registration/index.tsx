@@ -1,8 +1,8 @@
-import { View, Alert, Keyboard, ScrollView } from "react-native";
+import { View, Alert, Keyboard, ScrollView, Text } from "react-native";
 import { useState } from "react";
 import { 
   Container, ContentContainer, ColumnContainer, RowContainer, SelectBoxProps,
-  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect
+  DietContainer, LabelDiet, ContainerSelect, SelectView, Circle, TextSelect, ErrorText
 } from "./styles";
 
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
@@ -16,6 +16,8 @@ import Input from "@components/Input";
 import { ButtonFill } from "@components/Button";
 
 import { useNavigation } from "@react-navigation/native";
+import { mealSchema } from "validations/validationFields";
+import { ValidationError } from "yup";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -23,25 +25,52 @@ export default function Registration() {
   const [date, setDate] = useState<string | Date>("");
   const [hour, setHour] = useState<string | Date>("");
   const [status, setStatus] = useState<SelectBoxProps>("NEUTRAL");
+  const [errors, setErrors] = useState<Record<string, string>>({
+    name: "",
+    description: "",
+    date: "",
+    hour: "",
+    status: ""
+  })
 
   const navigation = useNavigation();
 
   async function handleRegistrationMeal(){
     try {
-      const id = await generateId(date);
+      const id = await generateId(date.toString());
+      const meal = await mealSchema.validate({
+        name, description, date, hour, status
+      }, {abortEarly: false})
+      
+      if(meal.name && meal.description && meal.date && meal.hour && meal.status){
+        const registration: DataMealDTO = {
+          title: meal.date,
+          data: [
+            { 
+              id: id ? id : 0, 
+              name: meal.name, 
+              description: meal.description, 
+              hour: meal.hour, 
+              status: meal.status
+            }
+          ]
+        }
 
-      const registration: DataMealDTO = {
-        title: date,
-        data: [
-          { id: id ? id : 0, name, description, hour, status }
-        ]
-      }
-  
-      if(name && description && date && hour && status !== "NEUTRAL"){
         await mealCreate(registration);
-        navigation.navigate("Feedback", { status: status });
+        navigation.navigate("Feedback", { status: meal.status });
       }
     } catch (error) {
+      if(error instanceof ValidationError){
+        const formErrors: Record<string, string> = {};
+
+        error.inner.forEach((err) => {
+          if (err.path && err.message) {
+            formErrors[err.path] = err.message;
+          }
+        });
+        setErrors(formErrors);
+      }
+
       if(error instanceof Error){
         Alert.alert("Nova Refeição", error.message);
       }
@@ -108,6 +137,7 @@ export default function Registration() {
             <Input 
               label="Nome"
               value={name}
+              error={errors.name}
               onChangeText={(text) => setName(text)}
             />
 
@@ -117,6 +147,7 @@ export default function Registration() {
               numberOfLines={4}
               autoCorrect={false}
               value={description}
+              error={errors.description}
               onChangeText={(text) => setDescription(text)}
               style={{height: 120, minHeight: 120, textAlignVertical: 'top'}}
             />
@@ -127,6 +158,7 @@ export default function Registration() {
                   label="Data"
                   value={date.toString()}
                   onFocus={handleSetDate}
+                  error={errors.date}
                 />
               </View>
 
@@ -135,6 +167,7 @@ export default function Registration() {
                   label="Hora"
                   value={hour.toString()}
                   onFocus={handleSetTime}
+                  error={errors.hour}
                 />
               </View>
             </RowContainer>
@@ -163,6 +196,8 @@ export default function Registration() {
                   </SelectView>
                 </ContainerSelect>
               </RowContainer>
+              
+              { errors.status && <ErrorText>{errors.status}</ErrorText> }
             </DietContainer>
           </ColumnContainer>
 
