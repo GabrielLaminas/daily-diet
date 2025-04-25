@@ -13,9 +13,13 @@ const Logo = styled.Image`
   height: 37px;
 `;
 
+const SelectAvatar = styled.TouchableOpacity``
+
 const Avatar = styled.Image`
   width: 40px;
   height: 40px;
+  border-radius: 20px;
+  border: 2px solid #1B1D1E;
 `;
 
-export { Container, Logo, Avatar };
+export { Container, Logo, SelectAvatar, Avatar };
