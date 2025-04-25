@@ -25,5 +25,7 @@ export function Meal({ hour, description, status, ...rest }: MealProps) {
 }
 
 export function TitleMeal({ title }: { title: string }){
-  return <Title>{title.replaceAll("/", ".")}</Title>
+  const [ day, month, year ] = title.split("/");
+  const date = `${day}.${month}.${year.slice(2)}`;
+  return <Title>{date}</Title>
 }
