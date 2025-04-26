@@ -78,8 +78,8 @@ export default function Home() {
   } 
 
   useFocusEffect(useCallback(() => {
-    calculateStatistic();
     getAllMeals();
+    calculateStatistic();
   }, []));
 
   return (
