@@ -18,7 +18,7 @@ Nesse desafio, eu desenvolvi uma aplicação uma aplicação de cadastro de refe
   ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/home.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/statistic-diet.jpg)
   ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/new-meal.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/edit-meal.jpg)
   ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/meal-details.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/delete-meal.jpg)
-  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg)
+  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration-2.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg)
 
 ### Neste desafio eu relembrei e pratiquei conceitos como:
 
