@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SectionList } from "react-native";
 import { Container, Loading, Gradient } from "./styles";
 import { DataMealDTO, DataInfoDTO } from "storage/meal/mealStorageDTO";
@@ -22,6 +22,8 @@ export default function Home() {
   const [titlePercent, setTitlePercent] = useState(0);
   const [statePercent, setStatePercent] = useState<StateProps>("NEUTRAL");
   const navigation = useNavigation();
+
+  const memorizeData = useMemo(() => meals, [meals]);
 
   async function handleOpenPercentage(){
     try {
@@ -99,7 +101,7 @@ export default function Home() {
           <SectionList 
             showsVerticalScrollIndicator={false}
             contentContainerStyle={meals.length === 0 ? { flex: 1 } : { paddingVertical: 24, gap: 8, paddingBottom: 160 }}
-            sections={meals}
+            sections={memorizeData}
             keyExtractor={(item) => String(item.id)}
             renderItem={({item: { id, hour, description, status, name }, section: { title }}) => (
               <Meal 
@@ -117,6 +119,9 @@ export default function Home() {
                 message="Cadastre sua primeira refeição!" 
               />
             )}
+            initialNumToRender={8}
+            windowSize={5}
+            removeClippedSubviews
           />
         )
       }
