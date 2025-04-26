@@ -13,9 +13,12 @@ Nesse desafio, eu desenvolvi uma aplicação uma aplicação de cadastro de refe
 - Adicionar e armazenar uma foto de perfil
 
 ### Midia
-  Empty | Fill
+  Screenshots | Screenshots 
   :---: | :---:
-  ![HomeMobile]() | ![HomeMobile]()
+  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/home.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/statistic-diet.jpg)
+  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/new-meal.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/edit-meal.jpg)
+  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/meal-details.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/delete-meal.jpg)
+  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg)
 
 ### Neste desafio eu relembrei e pratiquei conceitos como:
 
@@ -38,4 +41,4 @@ Nesse desafio, eu desenvolvi uma aplicação uma aplicação de cadastro de refe
 - Apliquei gradientes com ([LinearGradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/))
 - Apliquei icones com ([Phosphor Icons](https://phosphoricons.com/))
 - Apliquei icones com ([React Native Vector Icons](https://github.com/oblador/react-native-vector-icons))
-- Apliquei fonte com ([Expo Font](https://docs.expo.dev/versions/latest/sdk/font/)[Expo Google Gonts Nunito](https://www.npmjs.com/package/@expo-google-fonts/nunito))
+- Apliquei fonte com ([Expo Font](https://docs.expo.dev/versions/latest/sdk/font/) | [Expo Google Gonts Nunito](https://www.npmjs.com/package/@expo-google-fonts/nunito))
