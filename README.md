@@ -13,12 +13,7 @@ Nesse desafio, eu desenvolvi uma aplicação uma aplicação de cadastro de refe
 - Adicionar e armazenar uma foto de perfil
 
 ### Midia
-  Screenshots | Screenshots 
-  :---: | :---:
-  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/home.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/statistic-diet.jpg)
-  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/new-meal.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/edit-meal.jpg)
-  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/meal-details.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/delete-meal.jpg)
-  ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration-2.jpg) | ![HomeMobile](https://github.com/GabrielLaminas/daily-diet/blob/master/assets/feedback-meal-registration.jpg)
+  - Link do drive contendo as imagens ([Link](https://drive.google.com/drive/folders/1ZaQ3G8naIMTAwcrBmqNNmd2MSwPwZOj5?usp=drive_link))
 
 ### Neste desafio eu relembrei e pratiquei conceitos como:
 
